@@ -1,2 +1,7 @@
 services:
-  Toyokumo\ZipBundle\ZipUtil: ~
+  Toyokumo\ZipBundle\ZipUtil:
+    class:
+    public: true
+  Toyokumo\ZipBundle\StreamedZipResponse:
+    class:
+    public: true
