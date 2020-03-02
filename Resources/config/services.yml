@@ -1,7 +1,13 @@
 services:
-  Toyokumo\ZipBundle\ZipUtil:
-    class:
+
+  toyokumo.zip_bundle.zip_util:
+    class: Toyokumo\ZipBundle\ZipUtil
     public: true
-  Toyokumo\ZipBundle\StreamedZipResponse:
-    class:
+
+  toyokumo.zip_bundle.streamed_zip_response:
+    class: Toyokumo\ZipBundle\StreamedZipResponse
     public: true
+
+  Toyokumo\ZipBundle\ZipUtil: '@toyokumo.zip_bundle.zip_util'
+
+  Toyokumo\ZipBundle\StreamedZipResponse: '@toyokumo.zip_bundle.streamed_zip_response'
