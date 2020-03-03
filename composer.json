@@ -1,7 +1,7 @@
 {
   "name": "toyokumo/zip-bundle",
   "description": "Symfony support of handling zip files",
-  "keyword": ["symfony", "bundle"],
+  "keywords": ["symfony", "bundle"],
   "homepage": "https://github.com/toyokumo/ZipBundle",
   "license": "MIT",
   "require": {
