@@ -30,14 +30,15 @@ class ZipUtil
      */
     public function unzip(string $path): array
     {
-        if ($this->zip->open($path) !== true) {
-            throw new RuntimeException('Unknown file format');
+				$res = $this->zip->open($path);
+        if ($res !== true) {
+            throw new RuntimeException('Unknown file format. Code: '. $res);
         }
         $dir = implode(['/tmp', '/', uniqid('zip')]);
         try {
             $this->zip->extractTo($dir);
         } catch (Exception $e) {
-            throw new RuntimeException('Can not extract file');
+            throw new RuntimeException('Can not extract file: '. $e);
         }
 
         if ($this->zip->numFiles === 0) {
