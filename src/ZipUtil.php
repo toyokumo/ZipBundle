@@ -34,7 +34,7 @@ class ZipUtil
         if ($this->zip->open($path) !== true) {
             throw new RuntimeException('Unknown file format');
         }
-        $dir = '/tmp/' . uniqid('zip');
+        $dir = implode(['/tmp', '/', uniqid('zip')]);
         try {
             $this->zip->extractTo($dir);
 
@@ -44,7 +44,7 @@ class ZipUtil
 
             $files = [];
             for ($i = 0; $i < $this->zip->numFiles; $i++) {
-                $files[] = $dir . '/' . $this->zip->getNameIndex($i);
+                $files[] = implode([$dir, '/', $this->zip->getNameIndex($i)]);
             }
 
             return [$dir, $files];
