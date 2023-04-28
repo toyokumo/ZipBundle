@@ -16,18 +16,17 @@ class ZipUtil
      */
     private $zip;
 
-    /**
-     * Constructor.
-     */
     public function __construct()
     {
         $this->zip = new ZipArchive();
     }
 
     /**
-     * @param string $path
-     * @return array
-     * @throws Exception
+     * Extracts the contents of the specified file and returns the path to the extracted directory.
+     *
+     * @param string $path The path to the file to extract.
+     * @return array The path to the directory where the file contents were extracted.
+     * @throws RuntimeException If the file cannot be opened or extracted.
      */
     public function unzip(string $path): array
     {
@@ -56,8 +55,8 @@ class ZipUtil
     }
 
     /**
-     * @param string $dir
-     * @throws Exception
+     * Remove the contents in the specified directory recursively.
+     * @param string $dir The path to the directory to remove recursively.
      */
     public function clean(string $dir): void
     {
