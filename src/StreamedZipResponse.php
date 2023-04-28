@@ -29,7 +29,7 @@ class StreamedZipResponse extends StreamedResponse
         $this->zip = new ZipArchive();
         parent::__construct(null, 200, [
             'Content-Type' => 'application/zip',
-            'Content-Disposition' => 'attachment;filename="' . $this->zipName . '"'
+            'Content-Disposition' => 'attachment;filename="' . $this->zipName . '"',
         ]);
     }
 
