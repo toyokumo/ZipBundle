@@ -14,11 +14,11 @@ class ZipUtil
     /**
      * @var ZipArchive
      */
-    private $zip;
 
-    public function __construct()
+	public function __construct(
+		private $zip = new ZipArchive()
+	)
     {
-        $this->zip = new ZipArchive();
     }
 
     /**
@@ -30,19 +30,15 @@ class ZipUtil
      */
     public function unzip(string $path): array
     {
-				$res = $this->zip->open($path);
+        $res = $this->zip->open($path);
         if ($res !== true) {
-            throw new RuntimeException('Unknown file format. Code: '. $res);
+            throw new RuntimeException('Unknown file format. Code: ' . $res);
         }
         $dir = implode(['/tmp', '/', uniqid('zip')]);
         try {
             $this->zip->extractTo($dir);
         } catch (Exception $e) {
-            throw new RuntimeException('Can not extract file: '. $e);
-        }
-
-        if ($this->zip->numFiles === 0) {
-            throw new RuntimeException('Extracted file is empty');
+            throw new RuntimeException('Can not extract file: ' . $e);
         }
 
         $files = [];
