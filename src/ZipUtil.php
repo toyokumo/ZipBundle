@@ -36,22 +36,20 @@ class ZipUtil
         $dir = implode(['/tmp', '/', uniqid('zip')]);
         try {
             $this->zip->extractTo($dir);
-
-            if ($this->zip->numFiles === 0) {
-                throw new RuntimeException('Extracted file is empty');
-            }
-
-            $files = [];
-            for ($i = 0; $i < $this->zip->numFiles; $i++) {
-                $files[] = implode([$dir, '/', $this->zip->getNameIndex($i)]);
-            }
-
-            return [$dir, $files];
         } catch (Exception $e) {
             throw new RuntimeException('Can not extract file');
-        } finally {
-            $this->zip->close();
         }
+
+        if ($this->zip->numFiles === 0) {
+            throw new RuntimeException('Extracted file is empty');
+        }
+
+        $files = [];
+        for ($i = 0; $i < $this->zip->numFiles; $i++) {
+            $files[] = implode([$dir, '/', $this->zip->getNameIndex($i)]);
+        }
+
+        return [$dir, $files];
     }
 
     /**
