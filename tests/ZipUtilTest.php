@@ -24,10 +24,15 @@ final class ZipUtilTest extends TestCase
         $this->assertCount(2, $res);
         $this->assertStringStartsWith('/tmp/zip', $res[0]);
         $this->assertStringStartsWith('/tmp/zip', $res[1][0]);
+
+        //Additional test for ZipUtil::clean()
+        $z->clean($res[0]);
+        $this->assertFalse(file_exists($res[0]));
     }
     public function testUnzipMustThrowExceptionWithoutZip(): void
     {
         $z = new ZipUtil();
+        $this->expectException(RuntimeException::class);
         $this->expectExceptionMessage('Can not open the file as zip archive.');
 
         $res = $z->unzip('./tests/fixtures/test.txt');
@@ -35,6 +40,7 @@ final class ZipUtilTest extends TestCase
     public function testUnzipMustThrowExceptionWithRenamedZip(): void
     {
         $z = new ZipUtil();
+        $this->expectException(RuntimeException::class);
         $this->expectExceptionMessage('Can not open the file as zip archive.');
 
         $res = $z->unzip('./tests/fixtures/notzip.zip');
