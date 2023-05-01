@@ -1,15 +1,17 @@
 # ZipBundle
 
 ## get started
+Make sure that `composer` and `yarn` have been installed.
 
 ``` sh
 composer install
+yarn install
 ```
 
 ## formatting
 To formatting, run command as following.
 ``` sh
-yarn prettier --write
+yarn format-all
 ```
 
 ## testing
