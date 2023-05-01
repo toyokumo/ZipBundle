@@ -15,9 +15,7 @@ class ZipUtil
      * @var ZipArchive
      */
 
-	public function __construct(
-		private $zip = new ZipArchive()
-	)
+    public function __construct(private $zip = new ZipArchive())
     {
     }
 
