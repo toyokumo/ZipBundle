@@ -11,7 +11,7 @@ final class ZipUtilTest extends TestCase
     public function testUnzipWithValidZip(): void
     {
         $z = new ZipUtil();
-        $res = $z->unzip('./tests/fixtures/test.zip');
+        $res = [$dir, $files] = $z->unzip('./tests/fixtures/test.zip');
         /*
          * unzip return value must be like as
          * Array(
@@ -20,14 +20,15 @@ final class ZipUtilTest extends TestCase
          * )
          */
         $this->assertIsArray($res);
-        $this->assertIsArray($res[1]);
         $this->assertCount(2, $res);
-        $this->assertStringStartsWith('/tmp/zip', $res[0]);
-        $this->assertStringStartsWith('/tmp/zip', $res[1][0]);
+        $this->assertStringStartsWith('/tmp/zip', $dir);
+        $this->assertIsArray($files);
+        $this->assertStringStartsWith('/tmp/zip', $files[0]);
 
         //Additional test for ZipUtil::clean()
-        $z->clean($res[0]);
-        $this->assertFalse(file_exists($res[0]));
+        $this->assertTrue(file_exists($dir));
+        $z->clean($dir);
+        $this->assertFalse(file_exists($dir));
     }
     public function testUnzipMustThrowExceptionWithoutZip(): void
     {
