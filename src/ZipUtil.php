@@ -45,6 +45,9 @@ class ZipUtil
         for ($i = 0; $i < $this->zip->numFiles; $i++) {
             $files[] = sprintf('%s/%s', $dir, $this->zip->getNameIndex($i));
         }
+        if (!$this->zip->close()) {
+            throw new RuntimeException('Can not close the file:');
+        }
 
         return [$dir, $files];
     }

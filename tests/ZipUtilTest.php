@@ -30,20 +30,24 @@ final class ZipUtilTest extends TestCase
         $z->clean($dir);
         $this->assertFalse(file_exists($dir));
     }
-    public function testUnzipMustThrowExceptionWithoutZip(): void
+    public static function createNotZipfilePathProvider(): array
     {
-        $z = new ZipUtil();
-        $this->expectException(RuntimeException::class);
-        $this->expectExceptionMessage('Can not open the file as zip archive.');
-
-        $res = $z->unzip('./tests/fixtures/test.txt');
+        return [
+            // text file, not zip file.
+            ['path' => './tests/fixtures/test.txt'],
+            // text file renamed as zip file.
+            ['path' => './tests/fixtures/not-zip.zip'],
+        ];
     }
-    public function testUnzipMustThrowExceptionWithRenamedZip(): void
+    /**
+     * @dataProvider createNotZipfilePathProvider
+     */
+    public function testUnzipMustThrowExceptionWithoutZip($path): void
     {
         $z = new ZipUtil();
         $this->expectException(RuntimeException::class);
         $this->expectExceptionMessage('Can not open the file as zip archive.');
 
-        $res = $z->unzip('./tests/fixtures/notzip.zip');
+        $res = $z->unzip($path);
     }
 }
