@@ -56,3 +56,6 @@ composer.lock
 
 # ideavim
 .idea
+
+# npm
+/node_modules

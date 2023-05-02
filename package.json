@@ -1,0 +1,13 @@
+{
+  "scripts": {
+    "format:prettier": "prettier --write",
+    "format-all": "yarn format:prettier \"./src/**/*.php\" \"./tests/**/*.php\""
+  },
+  "dependencies": {
+    "@prettier/plugin-php": "^0.18.9",
+    "@toyokumo/prettier-config": "^1.0.3",
+    "prettier": "^2.8.8"
+  }
+}
+
+
