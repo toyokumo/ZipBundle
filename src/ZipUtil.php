@@ -22,6 +22,19 @@ class ZipUtil
     }
 
     /**
+     * @param string $zipName
+     * @param array{name: string, content: string}[] $files
+     */
+    public function zip(string $zipName, array $files): void
+    {
+        $this->zip->open($zipName, ZipArchive::CREATE);
+        foreach ($files as $file) {
+            $this->zip->addFromString($file['name'], $file['content']);
+        }
+        $this->zip->close();
+    }
+
+    /**
      * Extracts the contents of the specified file and returns the path to the extracted directory.
      *
      * @param string $path The path to the file to extract.
